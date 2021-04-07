@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprites/screens/player_computer/Mouse.png" type="Texture" id=1]
+[ext_resource path="res://src/characters/glasses_mouse/GlassesMouse.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/glasses_mouse/states/MouseStateIdle.gd" type="Script" id=3]
+[ext_resource path="res://src/characters/glasses_mouse/states/MouseStateMove.gd" type="Script" id=4]
+[ext_resource path="res://sprites/screens/player_computer/Sunglasses.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1, 1 )
+
+[node name="GlassesMouse" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+position = Vector2( 3, 10 )
+amount = 24
+lifetime = 0.25
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 2.5
+direction = Vector2( 1, 1 )
+gravity = Vector2( 49, 98 )
+initial_velocity = 5.0
+linear_accel = -10.0
+radial_accel = 15.0
+
+[node name="Mouse" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sunglasses" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -5, -9 )
+shape = SubResource( 1 )
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 3 )
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource( 4 )

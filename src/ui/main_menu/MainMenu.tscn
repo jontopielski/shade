@@ -1,0 +1,122 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://fonts/JonLand.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/ui/main_menu/MainMenu.gd" type="Script" id=3]
+[ext_resource path="res://fonts/JonLandCompressed.tres" type="DynamicFont" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 3.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleText" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -41.0
+margin_top = 59.0
+margin_right = 42.0
+margin_bottom = 67.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Shade"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="TitleText"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -1.0
+margin_right = -8.0
+margin_bottom = -1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuOptions" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 70.0
+margin_top = -112.0
+margin_right = -72.0
+margin_bottom = -17.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="NewGame" type="Button" parent="MenuOptions"]
+margin_right = 138.0
+margin_bottom = 21.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 0.823529, 0.45098, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.823529, 0.45098, 1 )
+text = "NEW GAME"
+
+[node name="Continue" type="Button" parent="MenuOptions"]
+margin_top = 21.0
+margin_right = 138.0
+margin_bottom = 42.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 0.823529, 0.45098, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.823529, 0.45098, 1 )
+text = "CONTINUE"
+
+[node name="Quit" type="Button" parent="MenuOptions"]
+margin_top = 42.0
+margin_right = 138.0
+margin_bottom = 63.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 0.823529, 0.45098, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.823529, 0.45098, 1 )
+text = "QUIT"
+[connection signal="pressed" from="MenuOptions/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="MenuOptions/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="MenuOptions/Quit" to="." method="_on_Quit_pressed"]

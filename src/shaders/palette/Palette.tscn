@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/shaders/palette/Palette.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 swap_color : hint_color;
+
+void fragment() {
+	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+	float rgb_avg = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
+	COLOR = mix(swap_color, COLOR, float(int(rgb_avg < 0.01 || rgb_avg > 0.99)));
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/swap_color = Color( 0.188235, 0.376471, 0.509804, 1 )
+
+[node name="Palette" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Shader" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
