@@ -11,8 +11,8 @@
 [ext_resource path="res://src/ui/question_box/states/QuestionBoxStateFinished.gd" type="Script" id=9]
 [ext_resource path="res://src/ui/question_box/states/QuestionBoxStateSelection.gd" type="Script" id=10]
 [ext_resource path="res://src/ui/question_box/states/QuestionBoxStateResponseText.gd" type="Script" id=11]
-[ext_resource path="res://sprites/screens/player_computer/FaceIcon.png" type="Texture" id=12]
 [ext_resource path="res://src/ui/question_box/states/QuestionBoxStateInitialText.gd" type="Script" id=13]
+[ext_resource path="res://sprites/ui/textbox/RightArrow.png" type="Texture" id=14]
 
 [node name="QuestionBox" type="CanvasLayer"]
 script = ExtResource( 5 )
@@ -125,7 +125,7 @@ size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = 1
-text = "I don't fully understand!"
+text = "The question should be able to fill up two lines of text!"
 autowrap = true
 
 [node name="Options" type="HBoxContainer" parent="TextBox/Margin/HBox/HBox/VBox/VBox"]
@@ -135,14 +135,15 @@ margin_bottom = 33.0
 size_flags_horizontal = 3
 
 [node name="LeftBuffer" type="Control" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options"]
-margin_right = 73.0
+margin_right = 71.0
 margin_bottom = 9.0
 size_flags_horizontal = 3
 
 [node name="OptionOne" type="HBoxContainer" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options"]
-margin_left = 77.0
+margin_left = 75.0
 margin_right = 112.0
 margin_bottom = 9.0
+custom_constants/separation = 6
 
 [node name="SelectionContainer" type="CenterContainer" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options/OptionOne"]
 margin_right = 9.0
@@ -151,15 +152,15 @@ rect_min_size = Vector2( 9, 9 )
 
 [node name="SelectionOneTexture" type="TextureRect" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options/OptionOne/SelectionContainer"]
 margin_right = 9.0
-margin_bottom = 8.0
-texture = ExtResource( 12 )
+margin_bottom = 9.0
+texture = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Option" type="Label" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options/OptionOne"]
-margin_left = 13.0
-margin_right = 35.0
+margin_left = 15.0
+margin_right = 37.0
 margin_bottom = 9.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
@@ -175,8 +176,9 @@ rect_min_size = Vector2( 16, 0 )
 
 [node name="OptionTwo" type="HBoxContainer" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options"]
 margin_left = 136.0
-margin_right = 164.0
+margin_right = 166.0
 margin_bottom = 9.0
+custom_constants/separation = 6
 
 [node name="SelectionContainer" type="CenterContainer" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options/OptionTwo"]
 margin_right = 9.0
@@ -185,15 +187,15 @@ rect_min_size = Vector2( 9, 9 )
 
 [node name="SelectionTwoTexture" type="TextureRect" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options/OptionTwo/SelectionContainer"]
 margin_right = 9.0
-margin_bottom = 8.0
-texture = ExtResource( 12 )
+margin_bottom = 9.0
+texture = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Option" type="Label" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options/OptionTwo"]
-margin_left = 13.0
-margin_right = 28.0
+margin_left = 15.0
+margin_right = 30.0
 margin_bottom = 9.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
@@ -202,7 +204,7 @@ custom_constants/shadow_offset_y = 1
 text = "No"
 
 [node name="RightBuffer" type="Control" parent="TextBox/Margin/HBox/HBox/VBox/VBox/Options"]
-margin_left = 168.0
+margin_left = 170.0
 margin_right = 241.0
 margin_bottom = 9.0
 size_flags_horizontal = 3
@@ -256,9 +258,9 @@ script = ExtResource( 9 )
 
 [node name="Timer" type="Timer" parent="States/Finished"]
 one_shot = true
+[connection signal="tween_completed" from="Tween" to="States/InitialText" method="_on_Tween_tween_completed"]
 [connection signal="tween_completed" from="Tween" to="States/QuestionText" method="_on_Tween_tween_completed"]
 [connection signal="tween_completed" from="Tween" to="States/ResponseText" method="_on_Tween_tween_completed"]
-[connection signal="tween_completed" from="Tween" to="States/InitialText" method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="States/InitialText/Timer" to="States/InitialText" method="_on_Timer_timeout"]
 [connection signal="timeout" from="States/Selection/OptionsTimer" to="States/Selection" method="_on_OptionsTimer_timeout"]
 [connection signal="timeout" from="States/Finished/Timer" to="States/Finished" method="_on_Timer_timeout"]

@@ -8,7 +8,7 @@ func on_enter():
 	$Timer.start()
 
 func on_exit():
-	obj.reset_textbox()
+	pass
 
 func run(_delta):
 	pass
@@ -16,13 +16,16 @@ func run(_delta):
 func _input(event):
 	if fsm.state_curr == fsm.states.Finished and Input.is_action_just_pressed("ui_accept") \
 		and can_proceed:
+			var selected_option = obj.option_selection
+			obj.reset_textbox()
 			obj.reset_question_box_state()
 			fsm.state_next = fsm.states.Ready
 			obj.emit_signal("finished")
-			if obj.option_selection == 0:
+			if selected_option == 0:
 				obj.emit_signal("yes_responded")
 			else:
 				obj.emit_signal("no_responded")
+			
 
 func _on_Timer_timeout():
 	obj.ticker.show()

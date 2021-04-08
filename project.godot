@@ -42,6 +42,7 @@ Constants="*res://src/utils/Constants.gd"
 Helpers="*res://src/utils/Helpers.gd"
 TextBox="*res://src/ui/textbox/TextBox.tscn"
 QuestionBox="*res://src/ui/question_box/QuestionBox.tscn"
+Transition="*res://src/ui/transition/Transition.tscn"
 
 [display]
 

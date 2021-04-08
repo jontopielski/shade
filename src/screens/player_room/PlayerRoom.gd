@@ -11,6 +11,10 @@ func _ready():
 		$Palette.set_color(Color.black)
 	$Palette.is_enabled = enable_palette
 	OS.set_window_title("Debug: Player Room")
+	QuestionBox.connect("yes_responded", self, "_on_QuestionBox_yes_responded")
+
+func _on_QuestionBox_yes_responded():
+	Transition.transition_to_path("res://src/screens/player_computer/PlayerComputer.tscn")
 
 func _on_Player_interacted(collider):
 	if collider == $LightBulb/LightArea:

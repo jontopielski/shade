@@ -307,9 +307,6 @@ extents = Vector2( 14, 21 )
 
 [node name="PlayerRoom" type="Node2D"]
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 start_in_darkness = false
 
 [node name="Palette" parent="." instance=ExtResource( 3 )]

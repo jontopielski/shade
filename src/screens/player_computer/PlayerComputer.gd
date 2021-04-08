@@ -19,7 +19,6 @@ func _ready():
 	$ClockTimer.start()
 	set_time(date_time)
 	OS.set_window_title("Debug: Player Computer")
-	OS.window_borderless = true
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_accept"):
@@ -32,6 +31,19 @@ func _input(event):
 		if is_hovering_over_desktop and $Taskbar/StartButton.pressed:
 			$Taskbar/StartButton.pressed = false
 			$StartMenu.hide()
+		if $Taskbar/StartButton.pressed:
+			for option in $StartMenu/MenuOptions.get_children():
+				if "Option" in option.name:
+					if option.pressed:
+						match option.name:
+							"GameOption":
+								pass
+							"TrashOption":
+								pass
+							"NotesOption":
+								pass
+							"QuitOption":
+								Transition.transition_to_path("res://src/screens/player_room/PlayerRoom.tscn")
 
 func set_time(date_info):
 	var _am_pm = "AM" if date_info.hour <= 11 else "PM"
