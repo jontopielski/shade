@@ -5,7 +5,7 @@ var next_scene = null
 func _ready():
 	$ColorRect.material.set_shader_param("progress", 0.0)
 
-func transition_to_path(next_scene_path):
+func transition_to(next_scene_path):
 	next_scene = load(next_scene_path)
 	get_tree().paused = true
 	$AnimationPlayer.play("fade_to_black")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://sprites/screens/player_computer/TrashSlices.png" type="Texture" id=1]
-[ext_resource path="res://src/screens/player_computer/ComputerIcon.gd" type="Script" id=2]
+[ext_resource path="res://src/screens/player_computer/ComputerIcon.gd" type="Script" id=1]
+[ext_resource path="res://sprites/screens/player_computer/NotesSlices.png" type="Texture" id=2]
 
-[node name="TrashIcon" type="Node2D"]
-script = ExtResource( 2 )
+[node name="NotesIcon" type="Node2D"]
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -14,82 +14,89 @@ __meta__ = {
 [node name="Slice1" type="Sprite" parent="Slices"]
 position = Vector2( 0, -1 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 
 [node name="Slice2" type="Sprite" parent="Slices"]
 position = Vector2( 0, -2 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 1
 
 [node name="Slice3" type="Sprite" parent="Slices"]
 position = Vector2( 0, -3 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 2
 
 [node name="Slice4" type="Sprite" parent="Slices"]
 position = Vector2( 0, -4 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 3
 
 [node name="Slice5" type="Sprite" parent="Slices"]
 position = Vector2( 0, -5 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 4
 
 [node name="Slice6" type="Sprite" parent="Slices"]
 position = Vector2( 0, -6 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 5
 
 [node name="Slice7" type="Sprite" parent="Slices"]
 position = Vector2( 0, -7 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 6
 
 [node name="Slice8" type="Sprite" parent="Slices"]
 position = Vector2( 0, -8 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 7
 
 [node name="Slice9" type="Sprite" parent="Slices"]
 position = Vector2( 0, -9 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 8
 
 [node name="Slice10" type="Sprite" parent="Slices"]
 position = Vector2( 0, -10 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
+texture = ExtResource( 2 )
+hframes = 14
 frame = 9
 
 [node name="Slice11" type="Sprite" parent="Slices"]
-position = Vector2( 0, -11 )
+position = Vector2( 0, -10 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
-frame = 10
+texture = ExtResource( 2 )
+hframes = 14
+frame = 11
 
 [node name="Slice12" type="Sprite" parent="Slices"]
 position = Vector2( 0, -12 )
 rotation = 3.14159
-texture = ExtResource( 1 )
-hframes = 12
-frame = 10
+texture = ExtResource( 2 )
+hframes = 14
+frame = 12
+
+[node name="Slice13" type="Sprite" parent="Slices"]
+position = Vector2( 0, -13 )
+rotation = 3.14159
+texture = ExtResource( 2 )
+hframes = 14
+frame = 13

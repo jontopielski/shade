@@ -14,7 +14,7 @@ func _ready():
 	QuestionBox.connect("yes_responded", self, "_on_QuestionBox_yes_responded")
 
 func _on_QuestionBox_yes_responded():
-	Transition.transition_to_path("res://src/screens/player_computer/PlayerComputer.tscn")
+	Transition.transition_to("res://src/screens/player_computer/PlayerComputer.tscn")
 
 func _on_Player_interacted(collider):
 	if collider == $LightBulb/LightArea:

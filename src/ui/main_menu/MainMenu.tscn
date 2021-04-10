@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://audio/music/main_menu/SingleNotesAndDrums.ogg" type="AudioStream" id=1]
 [ext_resource path="res://fonts/JonLand.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/ui/main_menu/MainMenu.gd" type="Script" id=3]
 [ext_resource path="res://fonts/JonLandCompressed.tres" type="DynamicFont" id=7]
@@ -117,6 +118,10 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 0.823529, 0.45098, 1 )
 custom_colors/font_color_pressed = Color( 1, 0.823529, 0.45098, 1 )
 text = "QUIT"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
 [connection signal="pressed" from="MenuOptions/NewGame" to="." method="_on_NewGame_pressed"]
 [connection signal="pressed" from="MenuOptions/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="MenuOptions/Quit" to="." method="_on_Quit_pressed"]
