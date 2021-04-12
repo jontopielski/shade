@@ -22,9 +22,7 @@ func _on_Player_interacted(collider):
 			$Palette.set_color(Color.black)
 			$LightBulb.frame = 0
 			is_light_on = false
-			$YSort/Plant.hide()
 		else:
 			$Palette.set_color(Constants.BLUE)
 			$LightBulb.frame = 2
 			is_light_on = true
-			$YSort/Plant.show()
