@@ -327,16 +327,17 @@ extents = Vector2( 17, 10 )
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 14, 21 )
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 17, 6 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=16]
 
 [node name="PlayerRoom" type="Node2D"]
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
+start_in_darkness = false
 
 [node name="Palette" parent="." instance=ExtResource( 3 )]
 is_enabled = false
@@ -377,7 +378,6 @@ __meta__ = {
 }
 
 [node name="Dialog" parent="YSort/Plant" instance=ExtResource( 8 )]
-dialog = "Upon close study, the leaves reveal a synthetic sheen."
 
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort/Plant"]
 
@@ -415,7 +415,7 @@ __meta__ = {
 }
 
 [node name="Dialog" parent="YSort/Shelf" instance=ExtResource( 8 )]
-dialog = "The books haven't moved in so long they look glued together."
+dialog = "A big old shelf just waiting for someone to read something."
 
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort/Shelf"]
 
@@ -427,13 +427,13 @@ position = Vector2( 176, 144 )
 texture = ExtResource( 15 )
 
 [node name="Dialog" parent="Piano" instance=ExtResource( 8 )]
-dialog = "It sings a somber lullaby."
+dialog = "The piano hums a tune. It's seasoned with static."
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Piano"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Piano/StaticBody2D"]
 position = Vector2( 0, 2 )
-shape = SubResource( 16 )
+shape = SubResource( 15 )
 
 [node name="LightBulb" type="Sprite" parent="."]
 position = Vector2( 140, 110 )
@@ -454,7 +454,7 @@ default_color = Color( 0, 0, 0, 1 )
 position = Vector2( 0, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightBulb/LightArea"]
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
