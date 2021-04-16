@@ -3,7 +3,7 @@ extends CanvasLayer
 var next_scene = null
 
 func _ready():
-	$ColorRect.material.set_shader_param("progress", 0.0)
+	$ColorRect.hide()
 
 func transition_to(next_scene_path):
 	next_scene = load(next_scene_path)

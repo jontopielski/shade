@@ -12,14 +12,15 @@ var is_hovering_start_button = false
 var is_hovering_over_desktop = false
 
 func _ready():
-#	if $Palette:
-#		$Palette.set_color(Constants.WINDOWS)
+	Palette.set_color(Constants.WINDOWS)
 	$StartMenu.hide()
+	set_real_time()
+
+func set_real_time():
 	var date_time = OS.get_datetime()
 	current_second = date_time.second
 	$ClockTimer.start()
 	set_time(date_time)
-	OS.set_window_title("Debug: Player Computer")
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_accept"):
@@ -36,13 +37,18 @@ func _input(event):
 			open_notes_window()
 		if $TrashIcon/TrashButton.pressed and !is_window_open("trash"):
 			open_trash_window()
+		if $GameIcon/GameButton.pressed and !is_window_open("game"):
+			open_game_window()
 		if $Taskbar/StartButton.pressed:
 			for option in $StartMenu/MenuOptions.get_children():
 				if "Option" in option.name:
 					if option.pressed:
 						match option.name:
 							"GameOption":
-								pass
+								if !is_window_open("game"):
+									open_game_window()
+									$StartMenu.hide()
+									$Taskbar/StartButton.pressed = false
 							"TrashOption":
 								if !is_window_open("trash"):
 									open_trash_window()
@@ -56,15 +62,21 @@ func _input(event):
 							"QuitOption":
 								Transition.transition_to("res://src/screens/player_room/PlayerRoom.tscn")
 
+func open_game_window():
+	var next_window = WindowPanel.instance()
+	next_window.set_window_params("Game", $GameIcon.position, $WindowPositions/GameSpawn.position)
+	$Windows.add_child(next_window)
+	next_window.connect("focused", self, "_on_WindowPanel_focused")
+
 func open_trash_window():
 	var next_window = WindowPanel.instance()
-	next_window.set_window_type("Trash")
+	next_window.set_window_params("Trash", $TrashIcon.position, $WindowPositions/TrashSpawn.position)
 	$Windows.add_child(next_window)
 	next_window.connect("focused", self, "_on_WindowPanel_focused")
 
 func open_notes_window():
 	var next_window = WindowPanel.instance()
-	next_window.set_window_type("Notes")
+	next_window.set_window_params("Notes", $NotesIcon.position, $WindowPositions/NotesSpawn.position)
 	$Windows.add_child(next_window)
 	next_window.connect("focused", self, "_on_WindowPanel_focused")
 
@@ -135,3 +147,13 @@ func _on_NotesIconArea_body_exited(body):
 	if "Mouse" in body.name:
 		$NotesIcon/NotesButton.pressed = false
 		$NotesIcon/Shadow.hide()
+
+func _on_GameIconArea_body_entered(body):
+	if "Mouse" in body.name:
+		$GameIcon/GameButton.pressed = true
+		$GameIcon/Shadow.show()
+
+func _on_GameIconArea_body_exited(body):
+	if "Mouse" in body.name:
+		$GameIcon/GameButton.pressed = false
+		$GameIcon/Shadow.hide()

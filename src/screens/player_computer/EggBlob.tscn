@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/screens/player_computer/EggBlob.gd" type="Script" id=1]
+[ext_resource path="res://sprites/screens/player_computer/egg_blob/EggBlob1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/screens/player_computer/egg_blob/EggBlob2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/screens/player_computer/egg_blob/EggBlob3.png" type="Texture" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float diff_y = 0.1 * sin((2.0 * UV.y) + (5.0 * TIME));
+	float diff_x = 0.2 * sin((1.0 * UV.x) + (2.0 * TIME));
+	COLOR = texture(TEXTURE, vec2(UV.x + diff_x, UV.y + diff_y));
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 20.0
+
+[node name="EggBlob" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Shadow" type="Node2D" parent="."]
+visible = false
+
+[node name="Shadow1" type="Sprite" parent="Shadow"]
+modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 2 )
+position = Vector2( -1, -1 )
+texture = ExtResource( 2 )
+
+[node name="Shadow2" type="Sprite" parent="Shadow"]
+modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 2 )
+position = Vector2( 1, -1 )
+texture = ExtResource( 2 )
+
+[node name="Shadow3" type="Sprite" parent="Shadow"]
+modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 2 )
+position = Vector2( -1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Shadow4" type="Sprite" parent="Shadow"]
+modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 2 )
+position = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Normal" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="MouthOpen" type="Sprite" parent="."]
+visible = false
+material = SubResource( 2 )
+texture = ExtResource( 3 )
+
+[node name="Teeth" type="Sprite" parent="."]
+visible = false
+material = SubResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 3 )
+disabled = true
+
+[node name="TeethTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="TeethTimer" to="." method="_on_TeethTimer_timeout"]

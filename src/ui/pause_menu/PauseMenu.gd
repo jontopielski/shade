@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 var is_pause_active = false
-var current_selection = 0
 
 onready var menu_options = $Menu/Margin/MenuOptions
 onready var total_menu_options = $Menu/Margin/MenuOptions.get_child_count()
@@ -19,39 +18,15 @@ func _input(event):
 			is_pause_active = false
 			$Menu.hide()
 		elif !is_tree_paused and !is_pause_active:
-			current_selection = 0
-			update_current_selection(current_selection)
+			$Menu/Margin/MenuOptions/Resume.grab_focus()
 			is_pause_active = true
 			get_tree().paused = true
 			$Menu.show()
-	if (Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("ui_right")) and is_pause_active:
-		current_selection = min(total_menu_options - 1, current_selection + 1)
-		update_current_selection(current_selection)
-	if (Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_left")) and is_pause_active:
-		current_selection = max(0, current_selection - 1)
-		update_current_selection(current_selection)
-	if Input.is_action_just_pressed("ui_accept") and is_pause_active:
-		match current_selection:
-			0:
-				get_tree().paused = false
-				is_pause_active = false
-				$Menu.hide()
-			1:
-				menu_options.get_node("Hint").pressed = true
-			2:
-				menu_options.get_node("Settings").pressed = true
-			3:
-				menu_options.get_node("Quit").pressed = true
 
-func update_current_selection(_current_selection):
-	for option in menu_options.get_children():
-		option.pressed = false
-	match _current_selection:
-		0:
-			menu_options.get_node("Resume").pressed = true
-		1:
-			menu_options.get_node("Hint").pressed = true
-		2:
-			menu_options.get_node("Settings").pressed = true
-		3:
-			menu_options.get_node("Quit").pressed = true
+func _on_Quit_pressed():
+	get_tree().quit()
+
+func _on_Resume_pressed():
+	get_tree().paused = false
+	is_pause_active = false
+	$Menu.hide()

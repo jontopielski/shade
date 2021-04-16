@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const SPEED = 125.0
+const SPEED = 150.0
 const ACCELERATION = 2.0
 
 onready var fsm = FSM.new(self, $States, $States/Idle, false)

@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://sprites/screens/jail/CellBars.png" type="Texture" id=1]
+[ext_resource path="res://src/screens/jail_cell/JailCell.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/screens/jail/CellBase.png" type="Texture" id=4]
+[ext_resource path="res://sprites/characters/jail/BookCreature.png" type="Texture" id=5]
+[ext_resource path="res://src/ui/dialog/Dialog.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/characters/jail/GiantEye.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 11, 10 )
+
+[node name="JailCell" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BehindPlayer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CellBase" type="TextureRect" parent="BehindPlayer"]
+margin_left = 97.0
+margin_top = 69.0
+margin_right = 183.0
+margin_bottom = 141.0
+texture = ExtResource( 4 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="BookCreature" type="Sprite" parent="YSort"]
+position = Vector2( 154, 112 )
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Dialog" parent="YSort/BookCreature" instance=ExtResource( 6 )]
+portrait = ExtResource( 7 )
+speaker = "Book of Forbidden Knowledge"
+dialog = "I am the book of forbidden knowledge."
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/BookCreature"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/BookCreature/StaticBody2D"]
+position = Vector2( 0, 4 )
+shape = SubResource( 1 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 134, 114 )
+
+[node name="FrontPlayer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CellBars" type="TextureRect" parent="FrontPlayer"]
+margin_left = 97.0
+margin_top = 69.0
+margin_right = 183.0
+margin_bottom = 141.0
+texture = ExtResource( 1 )

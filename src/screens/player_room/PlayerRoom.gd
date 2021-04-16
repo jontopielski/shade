@@ -8,21 +8,33 @@ var is_light_on = false
 
 func _ready():
 	if start_in_darkness:
-		$Palette.set_color(Color.black)
-	$Palette.is_enabled = enable_palette
-	OS.set_window_title("Debug: Player Room")
-	QuestionBox.connect("yes_responded", self, "_on_QuestionBox_yes_responded")
-
-func _on_QuestionBox_yes_responded():
-	Transition.transition_to("res://src/screens/player_computer/PlayerComputer.tscn")
+		Palette.set_color(Color.black)
+	else:
+		Palette.set_color(Constants.BLUE)
+	Palette.is_enabled = enable_palette
 
 func _on_Player_interacted(collider):
 	if collider == $LightBulb/LightArea:
 		if is_light_on:
-			$Palette.set_color(Color.black)
+			Palette.set_color(Color.black)
 			$LightBulb.frame = 0
 			is_light_on = false
 		else:
-			$Palette.set_color(Constants.BLUE)
+			Palette.set_color(Constants.BLUE)
 			$LightBulb.frame = 2
 			is_light_on = true
+
+func _on_ComputerQuestion_yes_responded():
+	Transition.transition_to("res://src/screens/player_computer/PlayerComputer.tscn")
+
+func _on_ShelfQuestion_yes_responded():
+	$AnimationPlayer.play("move_shelf")
+
+func pause_game():
+	get_tree().paused = true
+
+func unpause_game():
+	get_tree().paused = false
+
+func _on_StairsArea_body_entered(body):
+	Transition.transition_to("res://src/screens/stairwell/Stairwell.tscn")

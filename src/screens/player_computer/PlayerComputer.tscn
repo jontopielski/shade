@@ -1,11 +1,11 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://sprites/screens/player_computer/SpaceBackground.png" type="Texture" id=1]
 [ext_resource path="res://sprites/screens/player_computer/TimeTexture.png" type="Texture" id=2]
 [ext_resource path="res://sprites/screens/player_computer/start_button/StartNormal.png" type="Texture" id=3]
 [ext_resource path="res://src/screens/player_computer/PlayerComputer.gd" type="Script" id=4]
 [ext_resource path="res://src/characters/glasses_mouse/GlassesMouse.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/screens/player_computer/SwirlingSunglasses.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/screens/player_computer/EggSlices.png" type="Texture" id=6]
 [ext_resource path="res://sprites/screens/player_computer/BorderTile.png" type="Texture" id=7]
 [ext_resource path="res://sprites/screens/player_computer/StartFlag.png" type="Texture" id=8]
 [ext_resource path="res://src/screens/player_computer/TrashIcon.tscn" type="PackedScene" id=9]
@@ -20,6 +20,7 @@
 [ext_resource path="res://sprites/screens/player_computer/SmallerDither.png" type="Texture" id=18]
 [ext_resource path="res://sprites/screens/player_computer/TrashStartIcon.png" type="Texture" id=19]
 [ext_resource path="res://src/screens/player_computer/NotesIcon.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/3d/StackedSprite.tscn" type="PackedScene" id=21]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 14, 0, 14, 14, 0, 14 )
@@ -215,12 +216,8 @@ text = "AM"
 align = 1
 valign = 1
 
-[node name="Glasses" parent="." instance=ExtResource( 6 )]
-visible = false
-position = Vector2( 252, 27 )
-
 [node name="TrashIcon" parent="." instance=ExtResource( 9 )]
-position = Vector2( 28, 32 )
+position = Vector2( 250, 35 )
 
 [node name="Shadow" type="Node2D" parent="TrashIcon"]
 visible = false
@@ -268,7 +265,7 @@ __meta__ = {
 }
 
 [node name="NotesIcon" parent="." instance=ExtResource( 20 )]
-position = Vector2( 27, 87 )
+position = Vector2( 249, 92 )
 
 [node name="Shadow" type="Node2D" parent="NotesIcon"]
 visible = false
@@ -312,6 +309,77 @@ text = "Notes"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameIcon" parent="." instance=ExtResource( 21 )]
+position = Vector2( 249, 145 )
+sprite_sheet = ExtResource( 6 )
+frames = 12
+
+[node name="Shadow" type="Node2D" parent="GameIcon"]
+visible = false
+show_behind_parent = true
+
+[node name="EggShadowTopLeft" parent="GameIcon/Shadow" instance=ExtResource( 21 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -1, -1 )
+sprite_sheet = ExtResource( 6 )
+frames = 12
+
+[node name="EggShadowTopRight" parent="GameIcon/Shadow" instance=ExtResource( 21 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1, -1 )
+sprite_sheet = ExtResource( 6 )
+frames = 12
+
+[node name="EggShadowBottomLeft" parent="GameIcon/Shadow" instance=ExtResource( 21 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -1, 1 )
+sprite_sheet = ExtResource( 6 )
+frames = 12
+
+[node name="EggShadowBottomRight" parent="GameIcon/Shadow" instance=ExtResource( 21 )]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1, 1 )
+sprite_sheet = ExtResource( 6 )
+frames = 12
+
+[node name="GameButton" type="Button" parent="GameIcon"]
+margin_left = -13.0
+margin_top = 10.0
+margin_right = 13.0
+margin_bottom = 19.0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+toggle_mode = true
+text = "Game"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameIconArea" type="Area2D" parent="GameIcon"]
+position = Vector2( 0, 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameIcon/GameIconArea"]
+position = Vector2( 0, -4 )
+shape = SubResource( 9 )
+
+[node name="WindowPositions" type="Node2D" parent="."]
+
+[node name="TrashSpawn" type="Position2D" parent="WindowPositions"]
+position = Vector2( 9, 24 )
+
+[node name="NotesSpawn" type="Position2D" parent="WindowPositions"]
+position = Vector2( 52, 58 )
+
+[node name="GameSpawn" type="Position2D" parent="WindowPositions"]
+position = Vector2( 96, 93 )
 
 [node name="WavingFlag" type="Sprite" parent="."]
 material = SubResource( 15 )
@@ -414,4 +482,6 @@ position = Vector2( 140, 105 )
 [connection signal="body_exited" from="TrashIcon/TrashIconArea" to="." method="_on_TrashIconArea_body_exited"]
 [connection signal="body_entered" from="NotesIcon/NotesIconArea" to="." method="_on_NotesIconArea_body_entered"]
 [connection signal="body_exited" from="NotesIcon/NotesIconArea" to="." method="_on_NotesIconArea_body_exited"]
+[connection signal="body_entered" from="GameIcon/GameIconArea" to="." method="_on_GameIconArea_body_entered"]
+[connection signal="body_exited" from="GameIcon/GameIconArea" to="." method="_on_GameIconArea_body_exited"]
 [connection signal="timeout" from="ClockTimer" to="." method="_on_ClockTimer_timeout"]

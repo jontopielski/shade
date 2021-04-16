@@ -238,7 +238,7 @@ start_node = "Direction"
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="."]

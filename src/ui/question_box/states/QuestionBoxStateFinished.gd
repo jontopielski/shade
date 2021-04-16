@@ -20,12 +20,11 @@ func _input(event):
 			obj.reset_textbox()
 			obj.reset_question_box_state()
 			fsm.state_next = fsm.states.Ready
-			obj.emit_signal("finished")
 			if selected_option == 0:
 				obj.emit_signal("yes_responded")
 			else:
 				obj.emit_signal("no_responded")
-			
+			obj.emit_signal("finished")
 
 func _on_Timer_timeout():
 	obj.ticker.show()

@@ -247,7 +247,7 @@ script = ExtResource( 7 )
 script = ExtResource( 10 )
 
 [node name="OptionsTimer" type="Timer" parent="States/Selection"]
-wait_time = 0.25
+wait_time = 0.2
 one_shot = true
 
 [node name="ResponseText" type="Node" parent="States"]

@@ -1,8 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/screens/player_computer/WindowedStylebox.tres" type="StyleBox" id=1]
 [ext_resource path="res://sprites/screens/player_computer/window/Close.png" type="Texture" id=2]
 [ext_resource path="res://src/screens/player_computer/WindowPanel.gd" type="Script" id=3]
+[ext_resource path="res://src/3d/StackedSprite.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sprites/screens/player_computer/TireSlices.png" type="Texture" id=5]
+[ext_resource path="res://src/screens/player_computer/SwirlingSunglasses.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fonts/HelvetiPixel.tres" type="DynamicFont" id=7]
+[ext_resource path="res://sprites/screens/player_computer/Egg.png" type="Texture" id=8]
+[ext_resource path="res://sprites/screens/player_computer/EggShadow.png" type="Texture" id=9]
+[ext_resource path="res://sprites/screens/player_computer/EggPieces.png" type="Texture" id=10]
+[ext_resource path="res://src/screens/player_computer/EggBlob.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 2.0
@@ -20,6 +28,9 @@ extra_spacing_top = -5
 extra_spacing_bottom = -1
 font_data = SubResource( 2 )
 
+[sub_resource type="CircleShape2D" id=8]
+radius = 15.0333
+
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 59, 7 )
 
@@ -34,18 +45,145 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0, 0, 0, 1 )
 
+[sub_resource type="Animation" id=7]
+resource_name = "egg_shake"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/Game/Egg:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -30.0, 30.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel/Game/EggArea/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "egg_shatter"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel/Game/EggPieces:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel/Game/EggPieces/EggPiece1:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel/Game/EggPieces/EggPiece2:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 6.5, 8 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel/Game/EggPieces/EggPiece3:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 10.5, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel/Game/EggPieces/EggPiece4:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 6.5, -5 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Panel/Game/EggPieces/EggPiece5:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -10 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Panel/Game/EggPieces/EggPiece6:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -6.5, -5 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Panel/Game/EggPieces/EggPiece7:position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -10.5, 0 ) ]
+}
+
 [node name="WindowPanel" type="Control"]
-margin_right = 121.0
-margin_bottom = 83.0
+margin_right = 130.0
+margin_bottom = 88.0
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 121.0
-margin_bottom = 83.0
+margin_right = 130.0
+margin_bottom = 88.0
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -53,15 +191,15 @@ __meta__ = {
 
 [node name="Center" type="CenterContainer" parent="Panel"]
 margin_top = -15.0
-margin_right = 120.0
+margin_right = 135.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Button" parent="Panel/Center"]
-margin_left = 44.0
+margin_left = 51.0
 margin_top = 3.0
-margin_right = 76.0
+margin_right = 83.0
 margin_bottom = 12.0
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 1 )
@@ -76,6 +214,145 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 toggle_mode = true
 text = "Window"
 
+[node name="Notes" type="Control" parent="Panel"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Notes"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -60.0
+margin_top = 6.0
+margin_right = 61.0
+margin_bottom = 79.0
+custom_constants/separation = 0
+alignment = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="FirstHint" type="Label" parent="Panel/Notes/VBox"]
+margin_top = 15.0
+margin_right = 121.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "place"
+autowrap = true
+
+[node name="SecondHint" type="Label" parent="Panel/Notes/VBox"]
+margin_top = 29.0
+margin_right = 121.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "holder"
+autowrap = true
+
+[node name="ThirdHint" type="Label" parent="Panel/Notes/VBox"]
+margin_top = 43.0
+margin_right = 121.0
+margin_bottom = 57.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "text"
+autowrap = true
+
+[node name="Game" type="Control" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.5
+margin_top = -16.0
+margin_right = 16.5
+margin_bottom = 16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Egg" type="Sprite" parent="Panel/Game"]
+visible = false
+position = Vector2( 16, 28 )
+texture = ExtResource( 8 )
+centered = false
+offset = Vector2( -16, -28 )
+hframes = 4
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="EggShadow" type="Sprite" parent="Panel/Game/Egg"]
+visible = false
+show_behind_parent = true
+texture = ExtResource( 9 )
+centered = false
+offset = Vector2( -16, -28 )
+
+[node name="EggPieces" type="Node2D" parent="Panel/Game"]
+visible = false
+
+[node name="EggPiece1" type="Sprite" parent="Panel/Game/EggPieces"]
+texture = ExtResource( 10 )
+centered = false
+hframes = 7
+
+[node name="EggPiece2" type="Sprite" parent="Panel/Game/EggPieces"]
+texture = ExtResource( 10 )
+centered = false
+hframes = 7
+frame = 1
+
+[node name="EggPiece3" type="Sprite" parent="Panel/Game/EggPieces"]
+texture = ExtResource( 10 )
+centered = false
+hframes = 7
+frame = 2
+
+[node name="EggPiece4" type="Sprite" parent="Panel/Game/EggPieces"]
+texture = ExtResource( 10 )
+centered = false
+hframes = 7
+frame = 3
+
+[node name="EggPiece5" type="Sprite" parent="Panel/Game/EggPieces"]
+texture = ExtResource( 10 )
+centered = false
+hframes = 7
+frame = 4
+
+[node name="EggPiece6" type="Sprite" parent="Panel/Game/EggPieces"]
+texture = ExtResource( 10 )
+centered = false
+hframes = 7
+frame = 5
+
+[node name="EggPiece7" type="Sprite" parent="Panel/Game/EggPieces"]
+texture = ExtResource( 10 )
+centered = false
+hframes = 7
+frame = 6
+
+[node name="EggBlob" parent="Panel/Game" instance=ExtResource( 11 )]
+position = Vector2( 16.5, 16 )
+
+[node name="EggArea" type="Area2D" parent="Panel/Game"]
+position = Vector2( 15.5, 16 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/Game/EggArea"]
+shape = SubResource( 8 )
+
 [node name="HeaderArea" type="Area2D" parent="Panel"]
 position = Vector2( -0.999992, -1 )
 __meta__ = {
@@ -87,7 +364,7 @@ position = Vector2( 61, -6 )
 shape = SubResource( 4 )
 
 [node name="CloseArea" type="Area2D" parent="Panel"]
-position = Vector2( 113, -7 )
+position = Vector2( 122, -7 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -98,6 +375,38 @@ hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/CloseArea"]
 shape = SubResource( 5 )
+
+[node name="TrashObjects" type="Node2D" parent="."]
+visible = false
+
+[node name="Tire1" parent="TrashObjects" instance=ExtResource( 4 )]
+position = Vector2( 24, 27 )
+sprite_sheet = ExtResource( 5 )
+frames = 4
+
+[node name="Tire2" parent="TrashObjects" instance=ExtResource( 4 )]
+position = Vector2( 96, 53 )
+sprite_sheet = ExtResource( 5 )
+frames = 4
+
+[node name="Tire3" parent="TrashObjects" instance=ExtResource( 4 )]
+position = Vector2( 60, 38 )
+sprite_sheet = ExtResource( 5 )
+frames = 4
+
+[node name="Tire4" parent="TrashObjects" instance=ExtResource( 4 )]
+position = Vector2( 65, 68 )
+sprite_sheet = ExtResource( 5 )
+frames = 4
+
+[node name="Milk1" parent="TrashObjects" instance=ExtResource( 4 )]
+position = Vector2( 85, 24 )
+
+[node name="Milk2" parent="TrashObjects" instance=ExtResource( 4 )]
+position = Vector2( 35, 57 )
+
+[node name="SwirlingSunglasses" parent="TrashObjects" instance=ExtResource( 6 )]
+position = Vector2( 112, 33 )
 
 [node name="Cover" type="Panel" parent="."]
 visible = false
@@ -110,6 +419,12 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/egg_shake = SubResource( 7 )
+anims/egg_shatter = SubResource( 9 )
+[connection signal="body_entered" from="Panel/Game/EggArea" to="." method="_on_EggArea_body_entered"]
+[connection signal="body_exited" from="Panel/Game/EggArea" to="." method="_on_EggArea_body_exited"]
 [connection signal="body_entered" from="Panel/HeaderArea" to="." method="_on_HeaderArea_body_entered"]
 [connection signal="body_exited" from="Panel/HeaderArea" to="." method="_on_HeaderArea_body_exited"]
 [connection signal="body_entered" from="Panel/CloseArea" to="." method="_on_CloseArea_body_entered"]

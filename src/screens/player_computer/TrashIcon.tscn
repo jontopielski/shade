@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://sprites/screens/player_computer/TrashSlices.png" type="Texture" id=1]
+[ext_resource path="res://sprites/screens/player_computer/TrashSlicesBW.png" type="Texture" id=1]
 [ext_resource path="res://src/screens/player_computer/ComputerIcon.gd" type="Script" id=2]
 
 [node name="TrashIcon" type="Node2D"]

@@ -44,6 +44,7 @@ TextBox="*res://src/ui/textbox/TextBox.tscn"
 QuestionBox="*res://src/ui/question_box/QuestionBox.tscn"
 Transition="*res://src/ui/transition/Transition.tscn"
 PauseMenu="*res://src/ui/pause_menu/PauseMenu.tscn"
+Palette="*res://src/shaders/palette/Palette.tscn"
 
 [display]
 

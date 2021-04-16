@@ -6,6 +6,7 @@
 code = "shader_type canvas_item;
 
 uniform float progress : hint_range(0, 1);
+uniform bool is_fading_black = false;
 
 uniform float diamondPixelSize = 10f;
 
@@ -14,15 +15,21 @@ void fragment() {
 	float yFraction = fract(FRAGCOORD.y / diamondPixelSize);
 	float xDistance = abs(xFraction - 0.5);
 	float yDistance = abs(yFraction - 0.5);
-	if (xDistance + yDistance > progress) {
-		discard;
-	}
+	if (is_fading_black && xDistance + yDistance + UV.x + UV.y > progress * 4f) {
+        discard;
+    } else if (!is_fading_black && xDistance + yDistance + UV.x + UV.y < progress * 4f) {
+        discard;
+    }
+//	if (xDistance + yDistance > progress) {
+//		discard;
+//	}
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/progress = 1.0
-shader_param/diamondPixelSize = 14.0
+shader_param/progress = 0.0
+shader_param/is_fading_black = false
+shader_param/diamondPixelSize = 8.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "fade_to_black"
@@ -36,7 +43,31 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [ 0.0, 0.8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:material:shader_param/is_fading_black")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -51,7 +82,31 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [ 0.0, 0.8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:material:shader_param/is_fading_black")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [node name="Transition" type="CanvasLayer"]
