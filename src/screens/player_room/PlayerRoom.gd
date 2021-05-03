@@ -37,4 +37,5 @@ func unpause_game():
 	get_tree().paused = false
 
 func _on_StairsArea_body_entered(body):
-	Transition.transition_to("res://src/screens/stairwell/Stairwell.tscn")
+	if "Player" in body.name:
+		Transition.transition_to("res://src/screens/stairwell/Stairwell.tscn")

@@ -34,6 +34,11 @@ points = PoolVector2Array( 0, 0, 14, 0, 14, 14, 0, 14 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -473,6 +478,7 @@ __meta__ = {
 
 [node name="GlassesMouse" parent="." instance=ExtResource( 5 )]
 position = Vector2( 140, 105 )
+
 [connection signal="body_entered" from="DesktopArea" to="." method="_on_DesktopArea_body_entered"]
 [connection signal="body_exited" from="DesktopArea" to="." method="_on_DesktopArea_body_exited"]
 [connection signal="pressed" from="Taskbar/StartButton" to="." method="_on_StartButton_pressed"]

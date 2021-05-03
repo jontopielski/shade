@@ -553,7 +553,7 @@ hframes = 6
 frame = 5
 
 [node name="Shelf" type="Sprite" parent="YSort"]
-position = Vector2( 145, 90 )
+position = Vector2( 176, 90 )
 texture = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true

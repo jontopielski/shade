@@ -28,16 +28,16 @@ extra_spacing_top = -5
 extra_spacing_bottom = -1
 font_data = SubResource( 2 )
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=4]
 radius = 15.0333
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 59, 7 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 6, 6 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0.501961, 0.501961, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -45,8 +45,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="Animation" id=7]
-resource_name = "egg_shake"
+[sub_resource type="Animation" id=8]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel/Game/Egg:rotation_degrees")
@@ -242,7 +241,8 @@ margin_right = 121.0
 margin_bottom = 29.0
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "place"
+text = "PLACE"
+align = 1
 autowrap = true
 
 [node name="SecondHint" type="Label" parent="Panel/Notes/VBox"]
@@ -251,7 +251,9 @@ margin_right = 121.0
 margin_bottom = 43.0
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "holder"
+text = "HOLDER"
+align = 1
+valign = 1
 autowrap = true
 
 [node name="ThirdHint" type="Label" parent="Panel/Notes/VBox"]
@@ -260,7 +262,9 @@ margin_right = 121.0
 margin_bottom = 57.0
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "text"
+text = "TEXT"
+align = 1
+valign = 1
 autowrap = true
 
 [node name="Game" type="Control" parent="Panel"]
@@ -351,7 +355,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/Game/EggArea"]
-shape = SubResource( 8 )
+shape = SubResource( 4 )
 
 [node name="HeaderArea" type="Area2D" parent="Panel"]
 position = Vector2( -0.999992, -1 )
@@ -361,7 +365,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/HeaderArea"]
 position = Vector2( 61, -6 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="CloseArea" type="Area2D" parent="Panel"]
 position = Vector2( 122, -7 )
@@ -374,7 +378,7 @@ texture = ExtResource( 2 )
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/CloseArea"]
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="TrashObjects" type="Node2D" parent="."]
 visible = false
@@ -413,7 +417,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -15.0
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -421,8 +425,9 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/egg_shake = SubResource( 7 )
+anims/egg_shake = SubResource( 8 )
 anims/egg_shatter = SubResource( 9 )
+
 [connection signal="body_entered" from="Panel/Game/EggArea" to="." method="_on_EggArea_body_entered"]
 [connection signal="body_exited" from="Panel/Game/EggArea" to="." method="_on_EggArea_body_exited"]
 [connection signal="body_entered" from="Panel/HeaderArea" to="." method="_on_HeaderArea_body_entered"]
