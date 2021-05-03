@@ -1,6 +1,6 @@
 # shade
 
-A project I worked on for a few weeks then decided to stop working on. Could be used for learning purposes though!
+A Godot project I worked on for a few weeks then decided to stop working on. Could be used for learning purposes though! Has a working RPG interaction system and scene switching, along with a pseudo desktop interface controllable by keyboard/gamepad.
 
 ![Screen Shot 2021-05-03 at 4 12 46 PM](https://user-images.githubusercontent.com/6269590/116944463-66e7c000-ac2a-11eb-8d8c-eb1ac37b9bf7.png)
 
